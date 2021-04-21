@@ -5540,6 +5540,8 @@ in {
 
   py3exiv2 = callPackage ../development/python-modules/py3exiv2 { };
 
+  py3nvml = callPackage ../development/python-modules/py3nvml { };
+
   py3status = callPackage ../development/python-modules/py3status { };
 
   py3to2 = callPackage ../development/python-modules/3to2 { };
