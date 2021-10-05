@@ -65,7 +65,9 @@ stdenv.mkDerivation rec {
   # Silly build system, it looks for dbus file from gnome-shell in the
   # installation tree of the package it is configuring.
   postPatch = ''
-    substituteInPlace src/meson.build --replace "gt_prefix / gt_dbusinterfacedir / 'org.gnome.ShellSearchProvider2.xml'" "'${gnome.gnome-shell}/share/dbus-1/interfaces/org.gnome.ShellSearchProvider2.xml'"
+    substituteInPlace src/meson.build \
+       --replace "gt_prefix / gt_dbusinterfacedir / 'org.gnome.ShellSearchProvider2.xml'" \
+       "'${gnome.gnome-shell}/share/dbus-1/interfaces/org.gnome.ShellSearchProvider2.xml'"
 
     patchShebangs \
       data/icons/meson_updateiconcache.py \
