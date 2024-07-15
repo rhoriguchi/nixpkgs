@@ -6687,6 +6687,8 @@ self: super: with self; {
 
   kurbopy = callPackage ../development/python-modules/kurbopy { };
 
+  kvmd = callPackage ../applications/virtualization/kvmd { };
+
   l18n = callPackage ../development/python-modules/l18n { };
 
   labelbox = callPackage ../development/python-modules/labelbox { };
