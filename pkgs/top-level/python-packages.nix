@@ -11460,6 +11460,8 @@ self: super: with self; {
 
   pygetwindow = callPackage ../development/python-modules/pygetwindow { };
 
+  pyghmi = callPackage ../development/python-modules/pyghmi { };
+
   pygit2 = callPackage ../development/python-modules/pygit2 { };
 
   pygitguardian = callPackage ../development/python-modules/pygitguardian { };
