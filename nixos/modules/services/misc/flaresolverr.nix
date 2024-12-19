@@ -26,6 +26,25 @@ in
         default = 8191;
         description = "The port on which FlareSolverr will listen for incoming HTTP traffic.";
       };
+
+      prometheusExporter = lib.mkOption {
+        type = lib.types.submodule {
+          options = {
+            enable = lib.mkOption {
+              type = lib.types.bool;
+              default = false;
+              description = "Enable Prometheus exporter.";
+            };
+
+            port = lib.mkOption {
+              type = lib.types.port;
+              default = 8192;
+              description = "Listening port for Prometheus exporter.";
+            };
+          };
+        };
+        default = { };
+      };
     };
   };
 
@@ -38,6 +57,8 @@ in
       environment = {
         HOME = "/run/flaresolverr";
         PORT = toString cfg.port;
+        PROMETHEUS_ENABLED = if cfg.prometheusExporter.enable then "true" else "false";
+        PROMETHEUS_PORT = toString cfg.prometheusExporter.port;
       };
 
       serviceConfig = {
@@ -53,6 +74,9 @@ in
       };
     };
 
-    networking.firewall = lib.mkIf cfg.openFirewall { allowedTCPPorts = [ cfg.port ]; };
+    networking.firewall = lib.mkIf cfg.openFirewall {
+      allowedTCPPorts =
+        [ cfg.port ] + lib.optional cfg.prometheusExporter.enable cfg.prometheusExporter.port;
+    };
   };
 }
