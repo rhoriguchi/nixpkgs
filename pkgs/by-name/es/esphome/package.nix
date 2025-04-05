@@ -1,7 +1,7 @@
 {
   lib,
   callPackage,
-  python3Packages,
+  python3,
   fetchFromGitHub,
   installShellFiles,
   platformio,
@@ -13,7 +13,7 @@
 }:
 
 let
-  python = python3Packages.python.override {
+  python = python3.override {
     self = python;
     packageOverrides = self: super: {
       esphome-dashboard = self.callPackage ./dashboard.nix { };
@@ -116,7 +116,7 @@ python.pkgs.buildPythonApplication rec {
   # Needed for tests
   __darwinAllowLocalNetworking = true;
 
-  nativeCheckInputs = with python3Packages; [
+  nativeCheckInputs = with python.pkgs; [
     hypothesis
     mock
     pytest-asyncio
