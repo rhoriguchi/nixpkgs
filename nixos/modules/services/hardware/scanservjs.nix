@@ -71,15 +71,23 @@ in
       '';
       type = lib.types.submodule {
         freeformType = settingsFormat.type;
-        options.host = lib.mkOption {
-          type = lib.types.str;
-          description = "The IP to listen on.";
-          default = "127.0.0.1";
-        };
-        options.port = lib.mkOption {
-          type = lib.types.port;
-          description = "The port to listen on.";
-          default = 8080;
+        options = {
+          host = lib.mkOption {
+            type = lib.types.str;
+            description = "The IP to listen on.";
+            default = "127.0.0.1";
+          };
+          port = lib.mkOption {
+            type = lib.types.port;
+            description = "The port to listen on.";
+            default = 8080;
+          };
+          previewDirectory = lib.mkOption {
+            type = lib.types.path;
+            description = "Directory that is used for the preview image.";
+            default = "${package}/lib/data/preview";
+            defaultText = lib.literalExpression "pkgs.scanservjs";
+          };
         };
       };
     };
