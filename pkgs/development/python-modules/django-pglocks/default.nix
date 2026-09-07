@@ -14,12 +14,6 @@ buildPythonPackage (finalAttrs: {
 
   __structuredAttrs = true;
 
-  meta = {
-    description = "PostgreSQL locking context managers and functions for Django";
-    homepage = "https://github.com/Xof/django-pglocks";
-    license = lib.licenses.mit;
-  };
-
   src = fetchPypi {
     inherit (finalAttrs) pname version;
     hash = "sha256-PEfGb7+9Jo70YmlnOgUWoDlTmwlyuO0uyc/uRMS2VSM=";
@@ -28,6 +22,7 @@ buildPythonPackage (finalAttrs: {
   build-system = [ setuptools ];
 
   buildInputs = [ django ];
+
   dependencies = [
     django
     six
@@ -37,4 +32,10 @@ buildPythonPackage (finalAttrs: {
   doCheck = false;
 
   pythonImportsCheck = [ "django_pglocks" ];
+
+  meta = {
+    description = "PostgreSQL locking context managers and functions for Django";
+    homepage = "https://github.com/Xof/django-pglocks";
+    license = lib.licenses.mit;
+  };
 })
