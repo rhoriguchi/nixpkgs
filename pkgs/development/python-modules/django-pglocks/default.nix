@@ -2,6 +2,7 @@
   lib,
   buildPythonPackage,
   fetchPypi,
+  setuptools,
   django,
   six,
 }:
@@ -9,7 +10,7 @@
 buildPythonPackage rec {
   pname = "django-pglocks";
   version = "1.0.4";
-  format = "setuptools";
+  pyproject = true;
 
   meta = {
     description = "PostgreSQL locking context managers and functions for Django";
@@ -22,8 +23,10 @@ buildPythonPackage rec {
     sha256 = "3c47c66fbfbd268ef46269673a0516a039539b0972b8ed2ec9cfee44c4b65523";
   };
 
+  build-system = [ setuptools ];
+
   buildInputs = [ django ];
-  propagatedBuildInputs = [
+  dependencies = [
     django
     six
   ];
