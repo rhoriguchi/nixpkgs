@@ -2,6 +2,7 @@
   lib,
   buildPythonPackage,
   fetchFromGitHub,
+  setuptools,
   click,
   psutil,
   pytestCheckHook,
@@ -11,7 +12,7 @@
 buildPythonPackage rec {
   pname = "daemonocle";
   version = "1.2.3";
-  format = "setuptools";
+  pyproject = true;
 
   src = fetchFromGitHub {
     owner = "jnrbsn";
@@ -20,7 +21,9 @@ buildPythonPackage rec {
     hash = "sha256-K+IqpEQ4yhfSguPPm2Ult3kGNO/9H56B+kD5ntaCZdk=";
   };
 
-  propagatedBuildInputs = [
+  build-system = [ setuptools ];
+
+  dependencies = [
     click
     psutil
   ];
