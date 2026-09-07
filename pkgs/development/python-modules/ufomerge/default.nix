@@ -2,7 +2,6 @@
   lib,
   buildPythonPackage,
   fetchFromGitHub,
-  pythonRelaxDepsHook,
   pytestCheckHook,
   setuptools,
   setuptools-scm,
@@ -13,14 +12,14 @@
 
 buildPythonPackage rec {
   pname = "ufomerge";
-  version = "1.9.7";
+  version = "1.9.8";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "googlefonts";
     repo = "ufomerge";
     tag = "v${version}";
-    hash = "sha256-bA0tXopktnkrLTaRmqppqqQgC0nx8MxncO5oTuZeMQc=";
+    hash = "sha256-rIIT4FHdKVob+7AWONWcMCrwVZc4bkzni2csJ9L41fE=";
   };
 
   build-system = [
@@ -36,11 +35,6 @@ buildPythonPackage rec {
   nativeCheckInputs = [
     pytestCheckHook
     fontfeatures
-  ];
-
-  disabledTests = [
-    # Fails with `KeyError: 'B'`
-    "test_28"
   ];
 
   pythonImportsCheck = [ "ufomerge" ];
